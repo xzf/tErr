@@ -1,17 +1,23 @@
 package tErr
 
-func (e Error) Error() string {
-	return e.err.Error()
+import (
+	"github.com/xzf/runtimeX"
+	"strings"
+)
+
+func (t *tErr) Error() string {
+	return t.msg
 }
 
-func (e Error) Trace() Error {
-	return e
+func (t *tErr) Track() Error {
+	t.traceInfo = append(t.traceInfo, runtimeX.CallerLast())
+	return t
 }
 
-func (e Error) GoError() error {
-	return e.err
+func (t *tErr) TrackInfo() string {
+	return t.msg + "\n" + strings.Join(t.traceInfo, "\n")
 }
 
-func (e Error) TraceInfo() string {
-	return e.err.Error()
+func (t *tErr) TrackSlice() []string {
+	return t.traceInfo
 }
