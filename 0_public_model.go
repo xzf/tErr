@@ -2,7 +2,7 @@ package tErr
 
 type Error interface {
 	Error() string
-	Track() Error
-	TrackInfo() string
-	TrackSlice() []string
+	Trace() Error
+	TraceInfo() string
+	TraceSlice() []string
 }
